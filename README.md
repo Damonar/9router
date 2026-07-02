@@ -1,3 +1,12 @@
+---
+title: 9Router Dashboard
+emoji: 🚀
+colorFrom: indigo
+colorTo: blue
+sdk: docker
+app_port: 20128
+pinned: false
+---
 <div align="center">
   <img src="./images/9router.png?1" alt="9Router Dashboard" width="800"/>
   
