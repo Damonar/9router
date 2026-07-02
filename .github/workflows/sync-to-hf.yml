@@ -1,0 +1,16 @@
+name: Sync to Hugging Face
+on:
+  push:
+    branches: [master]
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - run: |
+          git remote add hf https://Damonar:$HF_TOKEN@huggingface.co/spaces/Damonar/Rtn
+          git push hf master:main --force
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
