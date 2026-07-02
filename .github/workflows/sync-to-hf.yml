@@ -10,6 +10,11 @@ jobs:
         with:
           fetch-depth: 0
       - run: |
+          git config --global user.email "sync@bot.com"
+          git config --global user.name "sync-bot"
+          rm -rf images public/providers
+          git add -A
+          git commit -m "remove images for hf sync" || true
           git remote add hf https://Damonar:$HF_TOKEN@huggingface.co/spaces/Damonar/Rtn
           git push hf master:main --force
         env:
