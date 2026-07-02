@@ -7,15 +7,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
       - run: |
-          git config --global user.email "sync@bot.com"
-          git config --global user.name "sync-bot"
-          rm -rf images public/providers
+          rm -rf images public/providers .git
+          git init
+          git config user.email "sync@bot.com"
+          git config user.name "sync-bot"
           git add -A
-          git commit -m "remove images for hf sync" || true
+          git commit -m "sync"
           git remote add hf https://Damonar:$HF_TOKEN@huggingface.co/spaces/Damonar/Rtn
-          git push hf master:main --force
+          git push hf HEAD:main --force
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
