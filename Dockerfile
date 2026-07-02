@@ -47,7 +47,12 @@ RUN apk --no-cache upgrade && apk --no-cache add su-exec && \
   printf '#!/bin/sh\nchown -R node:node /app/data /app/data-home 2>/dev/null\nexec su-exec node "$@"\n' > /entrypoint.sh && \
   chmod +x /entrypoint.sh
 
+# Backup/restore support: git for syncing SQLite db to a private HF Dataset repo
+RUN apk --no-cache add git
+COPY run.sh /app/run.sh
+RUN chmod +x /app/run.sh
+
 EXPOSE 20128
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["node", "custom-server.js"]
+CMD ["/app/run.sh"]
